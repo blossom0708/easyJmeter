@@ -1,15 +1,4 @@
-<h1 align="center">Easy-Jmeter</h1>
-<h4 align="center">性能自动化测试平台</h3>
-
-<p align="center">
-  <a href="https://www.oracle.com/cn/java/technologies/downloads/"><img src="https://img.shields.io/badge/jdk-%3D%3D11-red" alt="node version" data-canonical-src="https://img.shields.io/badge/jdk-%3D%3D11-red.svg" style="max-width:100%;"></a>
-  <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/node-%3D%3D12.13.0-green" alt="node version" data-canonical-src="https://img.shields.io/badge/vue-%3D%3D2.9.6-green.svg" style="max-width:100%;"></a>
-  <a href="https://www.mysql.com/cn/" rel="nofollow"><img src="https://img.shields.io/badge/mysql-%3D%3D5.7-8A2BE2.svg" alt="mysql version" data-canonical-src="https://img.shields.io/badge/mysql-%3D%3D5.7-8A2BE2.svg" style="max-width:100%;"></a>
-  <a href="https://www.mongodb.com/zh-cn" rel="nofollow">
-  <img src="https://img.shields.io/badge/mongodb-%3D%3D4.2-yellow.svg" alt="flask version" data-canonical-src="https://img.shields.io/badge/mongodb-%3D%3D4.2-yellow.svg" style="max-width:100%;"></a>
-  <a href="https://influxdb-v1-docs-cn.cnosdb.com/influxdb/v1.8/"><img src="https://img.shields.io/badge/influxdb-%3D%3D1.8-blue" alt="node version" data-canonical-src="https://img.shields.io/badge/influxdb-%3D%3D1.8-blue.svg" style="max-width:100%;"></a>
-</p>
-
+<h1 align="center">Easy-Jmeter性能自动化测试平台</h1>
 
 
 ### 项目介绍
@@ -17,11 +6,6 @@
 
 <font face="楷体" color=gray>平台技术栈为 vue + spring boot 前后端分离实现，数据库使用的是mysql、mongodb、influxdb，文件存储使用minio文件服务器。</font>
 
-<font face="楷体" color=gray>源码地址：[https://github.com/guojiaxing1995/easy-jmeter](https://github.com/guojiaxing1995/easy-jmeter)</font>
-
-<font face="楷体" color=gray>原型地址：[https://modao.cc/app/Qf56LAncrokbxs3iOBMRap](https://modao.cc/app/Qf56LAncrokbxs3iOBMRap#screen=slcycrmormft43z)</font>
-
-<font face="楷体" color=gray>使用文档：[https://blog.csdn.net/qq_36450484/article/details/136213502](https://blog.csdn.net/qq_36450484/article/details/136213502)</font>
 
 ### 部分模块展示
 
@@ -34,7 +18,7 @@
 ![图表报告1](https://img-blog.csdnimg.cn/direct/d348bef4da924558b438df110ed5947a.jpeg#pic_center)
 
 ### 系统架构
-![系统架构](https://img-blog.csdnimg.cn/direct/1c82503a78a644d484df87b6f9dd8f75.png#pic_center)
+##[系统架构]
 用户访问web页面，再由页面通过http请求访问业务后端服务。每台压力机服务器（只支持linux）上有且仅有一个jmeter，同时安装一个agent来控制jmeter运行，agent和服务端使用socketio实时通讯，用于服务端下发指令和agent上报状态。业务数据使用mysql进行存储，测试结果的详细数据使用mongodb存储，压测过程中的热数据使用influxdb存储，测试用例脚本、压测数据文件和压测结果文件（日志、jtl、报告)使用minio文件服务器存储。
 
 
