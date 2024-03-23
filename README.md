@@ -1,27 +1,19 @@
-<h1 align="center">Easy-Jmeter</h1>
-<h4 align="center">性能自动化测试平台</h3>
-
-<p align="center">
-  <a href="https://www.oracle.com/cn/java/technologies/downloads/"><img src="https://img.shields.io/badge/jdk-%3D%3D11-red" alt="node version" data-canonical-src="https://img.shields.io/badge/jdk-%3D%3D11-red.svg" style="max-width:100%;"></a>
-  <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/node-%3D%3D12.13.0-green" alt="node version" data-canonical-src="https://img.shields.io/badge/vue-%3D%3D2.9.6-green.svg" style="max-width:100%;"></a>
-  <a href="https://www.mysql.com/cn/" rel="nofollow"><img src="https://img.shields.io/badge/mysql-%3D%3D5.7-8A2BE2.svg" alt="mysql version" data-canonical-src="https://img.shields.io/badge/mysql-%3D%3D5.7-8A2BE2.svg" style="max-width:100%;"></a>
-  <a href="https://www.mongodb.com/zh-cn" rel="nofollow">
-  <img src="https://img.shields.io/badge/mongodb-%3D%3D4.2-yellow.svg" alt="flask version" data-canonical-src="https://img.shields.io/badge/mongodb-%3D%3D4.2-yellow.svg" style="max-width:100%;"></a>
-  <a href="https://influxdb-v1-docs-cn.cnosdb.com/influxdb/v1.8/"><img src="https://img.shields.io/badge/influxdb-%3D%3D1.8-blue" alt="node version" data-canonical-src="https://img.shields.io/badge/influxdb-%3D%3D1.8-blue.svg" style="max-width:100%;"></a>
-</p>
-
-
+<h1 align="center">EasyJmeter性能自动化测试平台</h1>
 
 ### 项目介绍
-<font face="楷体" color=gray>性能自动化测试平台依托于jmeter，在其上实现性能测试平台化管理。现在已实现了用例与测试数据管理、分布式压力测试、实时压测数据查看、测试结果查看与下载、历史测试数据查询和测试结果分析等功能。</font>
+<p>
+  <font>性能自动化测试平台依托于jmeter，在其上实现性能测试平台化管理。现在已实现了用例与测试数据管理、分布式压力测试、实时压测数据查看、测试结果查看与下载、历史测试数据查询和测试结果分析等功能。</font>
+  <font>平台技术栈为 vue + spring boot 前后端分离实现，数据库使用的是mysql、mongodb、influxdb，文件存储使用minio文件服务器。</font>
+</p>
 
-<font face="楷体" color=gray>平台技术栈为 vue + spring boot 前后端分离实现，数据库使用的是mysql、mongodb、influxdb，文件存储使用minio文件服务器。</font>
+### 数据库准备
+<font>安装mysql8.0.33，启动mysql localhost:3306，新建数据库easy_jmeter</font>
 
-<font face="楷体" color=gray>源码地址：[https://github.com/guojiaxing1995/easy-jmeter](https://github.com/guojiaxing1995/easy-jmeter)</font>
+<font>安装mongodb4.2.25，默认用户名admin密码admin，新建数据库easyJmeter</font>
 
-<font face="楷体" color=gray>原型地址：[https://modao.cc/app/Qf56LAncrokbxs3iOBMRap](https://modao.cc/app/Qf56LAncrokbxs3iOBMRap#screen=slcycrmormft43z)</font>
+<font>安装influxdb1.8，安装方式先启动influxd.exe 再使用influx -username admin -password '123456'，新建数据库easyjmeter</font>
 
-<font face="楷体" color=gray>使用文档：[https://blog.csdn.net/qq_36450484/article/details/136213502](https://blog.csdn.net/qq_36450484/article/details/136213502)</font>
+<font>安装minio文件服务器 用命令行启动，界面有密码及用户名。 .\minio.exe server D:\minio\data --console-address "127.0.0.1:9004" --address "127.0.0.1:9005"</font>
 
 ### 部分模块展示
 
@@ -69,7 +61,6 @@ socket.client.enable=true
   5. 部署server、agent。代码结构中api目录下为后端目录，后端使用springboot，修改配置文件并打包。其中作为server启动时设置socket.server.enable为true，作为agent启动时设置socket.client.enable为true，agent需要设置服务端socketio地址serverUrl。agent所在压力机需要配置jmete安装路径作为环境变量JMETER_HOME.
   6. 前端服务打包。代码结构中web目录下为前端服务，前端使用vue，node版本v12.13.0，打包命令 npm run build。
   7. 安装nginx。将web目录下default.conf按照实际情况修改，将前端包和配置文件放入nginx指定目录下启动。
-  8. 
 
 ### 容器化部署
 
