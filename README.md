@@ -3,7 +3,9 @@
 ### 项目介绍
 <p>
   <font>性能自动化测试平台依托于jmeter，在其上实现性能测试平台化管理。现在已实现了用例与测试数据管理、分布式压力测试、实时压测数据查看、测试结果查看与下载、历史测试数据查询和测试结果分析等功能。</font>
+
   <font>平台化的意义：1.方便团队协作和数据整合；2.定制化功能：在开源工具的基础上可以结合业务实现自定义功能，与外部系统对接，使得测试变得更加灵活和方便；3.降低成本：界面化比原有系统会操作相对简单，降低了压测环境的维护成本、操作成本和管理成本(重写或者二次开发)。</font>
+
   <font>平台技术栈为 vue + spring boot 前后端分离实现，数据库使用的是mysql、mongodb、influxdb，文件存储使用minio文件服务器。</font>
 </p>
 
@@ -44,7 +46,8 @@ influx -username admin -password '123456'
 ### 3、前端部署（使用Vscode）
 
   1. 切换到web目录下，/web为前端服务，前端需下载vue，node版本v12.13.0（也可以设置node多版本切换），下载依赖npm install，注：windows下下载依赖时，检查package.json 文件中是不是有fsevents相关依赖，如果报错则删除fsevents相关依赖。
-  2. 运行命令 npm run serve，出现运行地址则可以访问前端页面，前端启动成功。![前端页面启动成功](https://cdn.nlark.com/yuque/0/2024/png/42935774/1711269846624-d99aa21d-09a0-491a-8134-9f5446e98616.png?x-oss-process=image%2Fformat%2Cwebp)
+  2. 运行命令 npm run serve，出现运行地址则可以访问前端页面，前端启动成功。
+     ![<p align="center">前端页面启动成功<p>](https://cdn.nlark.com/yuque/0/2024/png/42935774/1711271945922-068986c6-af6a-4d42-acf7-1695aacdaf3d.png?x-oss-process=image%2Fformat%2Cwebp)
   3. 部署则运行 npm run build
 
 ### 后端部署(使用idea)
