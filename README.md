@@ -40,14 +40,15 @@ influx -username admin -password '123456'
 ```
 <font>安装minio文件服务器 用命令行启动，界面有密码及用户名，在application-dev.yml修改对应的设置。 </font>
 ``` shell
-.\minio.exe server D:\minio\data --console-address "127.0.0.1:9004" --address "127.0.0.1:9005"
+.\minio.exe server D:\minio\data --console-address "127.0.0.1:9004" --address "127.0.0.1:9005" # endpoint是启动行的API
 ```
 
 ### 3、前端部署（使用Vscode）
 
   1. 切换到web目录下，/web为前端服务，前端需下载vue，node版本v12.13.0（也可以设置node多版本切换），下载依赖npm install，注：windows下下载依赖时，检查package.json 文件中是不是有fsevents相关依赖，如果报错则删除fsevents相关依赖。
   2. 运行命令 npm run serve，出现运行地址则可以访问前端页面，前端启动成功。
-     ![<p align="center">前端页面启动成功<p>](https://cdn.nlark.com/yuque/0/2024/png/42935774/1711271945922-068986c6-af6a-4d42-acf7-1695aacdaf3d.png?x-oss-process=image%2Fformat%2Cwebp)
+     
+![前端页面启动成功](https://cdn.nlark.com/yuque/0/2024/png/42935774/1711271945922-068986c6-af6a-4d42-acf7-1695aacdaf3d.png?x-oss-process=image%2Fformat%2Cwebp)
   3. 部署则运行 npm run build
 
 ### 后端部署(使用idea)

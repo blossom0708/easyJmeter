@@ -48,9 +48,9 @@ logging:
     io.github.guojiaxing1995.easyJmeter.mapper: debug
 
 minio:
-  endpoint: http://127.0.0.1:9004
-  bucketName: dev
-  accessKey: blossom
+  endpoint: http://127.0.0.1:9005
+  bucketName: easyjmeter
+  accessKey: admin
   secretKey: htt000618
 
 swagger:
