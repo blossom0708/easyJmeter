@@ -16,9 +16,10 @@ spring:
       database: easyJmeter
       host: localhost
       port: 27017
-      username: admin
-      password: admin
-      authentication-database: adminJmeter
+      username: blossom
+      password: '000618'
+      # 密码必须使用字符串且是单引号，否则报错
+      authentication-database: easyJmeter
   influx:
     url: http://localhost:8086
     user: admin
