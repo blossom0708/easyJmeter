@@ -3,17 +3,10 @@
 ### 项目介绍
 <p>
   <font>性能自动化测试平台依托于jmeter，在其上实现性能测试平台化管理。现在已实现了用例与测试数据管理、分布式压力测试、实时压测数据查看、测试结果查看与下载、历史测试数据查询和测试结果分析等功能。</font>
+  <font>平台化的意义：1.方便团队协作和数据整合；2.定制化功能：在开源工具的基础上可以结合业务实现自定义功能，与外部系统对接，使得测试变得更加灵活和方便；3.降低成本：界面化比原有系统会操作相对简单，降低了压测环境的维护成本、操作成本和管理成本(重写或者二次开发)。</font>
   <font>平台技术栈为 vue + spring boot 前后端分离实现，数据库使用的是mysql、mongodb、influxdb，文件存储使用minio文件服务器。</font>
 </p>
 
-### 数据库准备
-<font>安装mysql8.0.33，启动mysql localhost:3306，新建数据库easy_jmeter</font>
-
-<font>安装mongodb4.2.25，默认用户名admin密码admin，新建数据库easyJmeter</font>
-
-<font>安装influxdb1.8，安装方式先启动influxd.exe 再使用influx -username admin -password '123456'，新建数据库easyjmeter</font>
-
-<font>安装minio文件服务器 用命令行启动，界面有密码及用户名。 .\minio.exe server D:\minio\data --console-address "127.0.0.1:9004" --address "127.0.0.1:9005"</font>
 
 ### 部分模块展示
 
@@ -30,42 +23,32 @@
 用户访问web页面，再由页面通过http请求访问业务后端服务。每台压力机服务器（只支持linux）上有且仅有一个jmeter，同时安装一个agent来控制jmeter运行，agent和服务端使用socketio实时通讯，用于服务端下发指令和agent上报状态。业务数据使用mysql进行存储，测试结果的详细数据使用mongodb存储，压测过程中的热数据使用influxdb存储，测试用例脚本、压测数据文件和压测结果文件（日志、jtl、报告)使用minio文件服务器存储。
 
 
-### 项目本地调试
-**web（前端）**
+### 项目本地部署(Windows)
+### 1、数据库准备
+<font>安装mysql8.0.33，启动mysql localhost:3306，新建数据库easy_jmeter，在application-dev.yml修改对应的设置</font>
 
-   在 web 目录下执行
-
-``` javascript
-npm install
-npm run serve
-```
-**api（后端）**
-
-   在 api 目录下启动EasyJmeterApplication
-   server端启动修改配置文件
-
+<font>安装mongodb4.2.25 启动mongo localhost:27017，新建数据库easyJmeter，创建数据库使用的用户，在application-dev.yml修改对应的设置</font>
 ``` shell
-socket.server.enable=true
+use easyJmeter # 若没有则默认新建数据库
+db.createUser({user:"blossom",pwd:"000618",roles:["readWrite"]})
 ```
-​	agent端启动修改配置文件
+<font>安装influxdb1.8，安装方式先启动influxd.exe 再在cmd中使用influx启动，地址 localhost:8086，新建数据库easyjmeter，在application-dev.yml修改对应的设置。</font>
 ``` shell
-socket.client.enable=true
+influx -username admin -password '123456'
+```
+<font>安装minio文件服务器 用命令行启动，界面有密码及用户名，在application-dev.yml修改对应的设置。 </font>
+``` shell
+.\minio.exe server D:\minio\data --console-address "127.0.0.1:9004" --address "127.0.0.1:9005"
 ```
 
-### 普通部署
+### 3、前端部署（使用Vscode）
 
-  1. 安装mysql5.7数据库
-  2. 安装mongodb4.2数据库
-  3. 安装influxdb1.8数据库
-  4. 安装minio文件服务器，设置指定bucket的Access Policy为public
-  5. 部署server、agent。代码结构中api目录下为后端目录，后端使用springboot，修改配置文件并打包。其中作为server启动时设置socket.server.enable为true，作为agent启动时设置socket.client.enable为true，agent需要设置服务端socketio地址serverUrl。agent所在压力机需要配置jmete安装路径作为环境变量JMETER_HOME.
-  6. 前端服务打包。代码结构中web目录下为前端服务，前端使用vue，node版本v12.13.0，打包命令 npm run build。
-  7. 安装nginx。将web目录下default.conf按照实际情况修改，将前端包和配置文件放入nginx指定目录下启动。
+  1. 切换到web目录下，/web为前端服务，前端需下载vue，node版本v12.13.0（也可以设置node多版本切换），下载依赖npm install，注：windows下下载依赖时，检查package.json 文件中是不是有fsevents相关依赖，如果报错则删除fsevents相关依赖。
+  2. 运行命令 npm run serve，出现运行地址则可以访问前端页面，前端启动成功。![前端页面启动成功](https://cdn.nlark.com/yuque/0/2024/png/42935774/1711269846624-d99aa21d-09a0-491a-8134-9f5446e98616.png?x-oss-process=image%2Fformat%2Cwebp)
+  3. 部署则运行 npm run build
 
-### 容器化部署
-
- 1. 构建后端jar包，代码结构中api目录下为后端目录，后端框架springboot,maven构建命令，`mvn clean package`。
- 2. 构建前端dist包，前端使用vue，node版本v12.13.0，打包命令 `npm run build`。
- 3. 编辑项目根目录下docker-compose.yaml 文件，修改environment中的minio地址和influxdb地址为实际地址，修改volumes中宿主机jmeter地址为实际地址。项目根目录下执行`docker-compose up -d`构建镜像并启动。
-
+### 后端部署(使用idea)
+  1. idea连接mysql数据库，新建mysql数据库easy_jmeter，在easy_jmeter中初始化/data/schema.sql。
+  2. 在/api/pom.xml中右键使用maven导入配置，导入成功则在上方Build中重新构建项目
+  3. 运行 EasyJmeterApplication.java
 
